@@ -102,7 +102,4 @@ public class Serialize_and_Deserialize_Binary_Tree_297 {
         }
         return root;
     }
-    class MyQueue {
-        TreeNode first;
-    }
 }
