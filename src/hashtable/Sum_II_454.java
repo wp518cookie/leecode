@@ -31,21 +31,13 @@ public class Sum_II_454 {
                     }
                 }
             }
-            Map<Integer, Integer> map1 = new HashMap();
+            int count = 0;
             for (int i = 0; i < C.length; i++) {
                 for (int j = 0; j < D.length; j++) {
                     Integer temp = C[i] + D[j];
-                    if (map1.get(temp) == null) {
-                        map1.put(temp, 1);
-                    } else {
-                        map1.put(temp, map1.get(temp) + 1);
+                    if (map.get(-temp) != null) {
+                        count += map.get(-temp);
                     }
-                }
-            }
-            int count = 0;
-            for(Integer i : map.keySet()) {
-                if (map1.get(-i) != null) {
-                    count += map.get(i) * map1.get(-i);
                 }
             }
             return count;
