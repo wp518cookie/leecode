@@ -15,7 +15,7 @@ public class Majority_Element_169 {
         int size = nums.length;
         int flag = size / 2;
         int[] count = new int[nums.length];
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap();
         for (int i = 0; i < nums.length; i++) {
             Integer temp = map.get(nums[i]);
             if (temp != null) {

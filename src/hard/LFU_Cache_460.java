@@ -8,8 +8,8 @@ import java.util.*;
 public class LFU_Cache_460 {
     private int capacity;
     private int size;
-    private HashMap<Integer, Integer> cache = new HashMap<>();
-    private HashMap<Integer, Integer> cacheCount = new HashMap<>();
+    private HashMap<Integer, Integer> cache = new HashMap();
+    private HashMap<Integer, Integer> cacheCount = new HashMap();
     public static void main(String[] args) {
         LFU_Cache_460 cache = new LFU_Cache_460(10);
     }
@@ -38,7 +38,7 @@ public class LFU_Cache_460 {
             } else if (size >= capacity && !cache.containsKey(key)) {
                 int min_count = -1;
                 int result_key = 0;
-                ListIterator<Integer> cusor = new ArrayList<>(cache.keySet()).listIterator();
+                ListIterator<Integer> cusor = new ArrayList(cache.keySet()).listIterator();
                 while (cusor.hasNext()) {
                     int temp_key = cusor.next();
                     if (min_count == -1) {

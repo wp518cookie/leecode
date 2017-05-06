@@ -19,7 +19,7 @@ public class Intersection_of_Two_Arrays_II_350 {
         }
         Map<Integer, Integer> map1 = new HashMap();
         Map<Integer, Integer> map2 = new HashMap();
-        List<Integer> result = new ArrayList<>();
+        List<Integer> result = new ArrayList();
         for (int i = 0; i < nums1.length; i++) {
             if (map1.containsKey(nums1[i])) {
                 int temp = map1.get(nums1[i]);

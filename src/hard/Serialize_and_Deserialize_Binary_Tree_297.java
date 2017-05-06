@@ -34,7 +34,7 @@ public class Serialize_and_Deserialize_Binary_Tree_297 {
         if (root == null) {
             return null;
         }
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList();
         StringBuilder sb = new StringBuilder();
         queue.offer(root);
         while (!queue.isEmpty()) {
@@ -74,7 +74,7 @@ public class Serialize_and_Deserialize_Binary_Tree_297 {
         if (arr.length == 1) {
             return new TreeNode(Integer.valueOf(arr[0]));
         }
-        Queue<TreeNode> nodeQueue = new LinkedList<>();
+        Queue<TreeNode> nodeQueue = new LinkedList();
         TreeNode root = new TreeNode(Integer.valueOf(arr[0]));
         nodeQueue.offer(root);
         int i = 1;

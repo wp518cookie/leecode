@@ -14,7 +14,7 @@ public class Find_All_Anagrams_in_a_String_438 {
     }
 
     public static List<Integer> findAnagrams(String s, String p) {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new ArrayList();
         if (s.length() > p.length()) {
             int[] letter = new int[26];
             boolean flag = true;

@@ -15,7 +15,7 @@ public class Pattern132_456 {
         if (nums.length < 3) {
             return false;
         }
-        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList();
         list.add(nums[0]);
         for (int i = 1; i < nums.length; i++) {
             if (nums[i-1] != nums[i]) {

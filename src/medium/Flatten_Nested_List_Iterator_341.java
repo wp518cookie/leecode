@@ -8,9 +8,9 @@ import java.util.List;
  * Created by ping.wu on 2017/1/18.
  */
 
-public class Flatten_Nested_List_Iterator_341 implements Iterator<Integer> {
+public abstract class Flatten_Nested_List_Iterator_341 implements Iterator<Integer> {
     private Iterator<Integer> it ;
-    private List<Integer> list = new LinkedList<>();
+    private List<Integer> list = new LinkedList();
     public Flatten_Nested_List_Iterator_341(List<NestedInteger> nestedList) {
         getValue(nestedList);
         it = list.iterator();

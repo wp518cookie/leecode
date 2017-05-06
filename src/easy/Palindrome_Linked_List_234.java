@@ -3,14 +3,14 @@ package easy;
 /**
  * Created by Administrator on 2017/4/12.
  */
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
-}
+//class ListNode {
+//    int val;
+//    ListNode next;
+//
+//    ListNode(int x) {
+//        val = x;
+//    }
+//}
 
 public class Palindrome_Linked_List_234 {
     private static ListNode preNode;

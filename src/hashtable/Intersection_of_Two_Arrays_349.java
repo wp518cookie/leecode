@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class Intersection_of_Two_Arrays_349 {
     public int[] intersection(int[] nums1, int[] nums2) {
-        Map<Integer, Integer> map1 = new HashMap<>();
-        Map<Integer, Integer> map2 = new HashMap<>();
+        Map<Integer, Integer> map1 = new HashMap();
+        Map<Integer, Integer> map2 = new HashMap();
         if (nums1 == null || nums2 == null || nums1.length < 1 || nums2.length < 1) {
             return new int[0];
         }
