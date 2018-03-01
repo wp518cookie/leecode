@@ -1,14 +1,8 @@
-/*
 package easy;
-
-*/
-/**
- * Created by Administrator on 2017/12/22.
- *//*
 
 public class String_Compression_443 {
     public static void main(String[] args) {
-
+        System.out.println(compress(new char[]{'a', 'a', 'b'}));
     }
 
     public static int compress(char[] chars) {
@@ -23,9 +17,19 @@ public class String_Compression_443 {
                 count++;
             } else {
                 before = chars[i];
-
+                if (count > 1) {
+                    allCount += (String.valueOf(count)).length() + 1;
+                    count = 1;
+                } else {
+                    allCount++;
+                }
             }
         }
+        if (count == 1) {
+            allCount++;
+        } else {
+            allCount += (String.valueOf(count)).length() + 1;
+        }
+        return allCount;
     }
 }
-*/
