@@ -1,5 +1,8 @@
 package easy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author wuping
  * @date 2018/9/18
@@ -11,21 +14,20 @@ public class Jewels_and_Stones_771 {
         System.out.println(numJewelsInStones(j, s));
     }
 
-    public static int numJewelsInStones(String j, String s) {
-        if (j == null || j.length() == 0 || s == null || s.length() == 0) {
+    public static int numJewelsInStones(String J, String S) {
+        if (J == null || J.length() == 0 || S == null || S.length() == 0) {
             return 0;
         }
-        int[] arr = new int[100];
-        char[] charArr = s.toCharArray();
-        for (char c : charArr) {
-            int idx = c - 30;
-            arr[idx]++;
+        int[] c = new int[128];
+        for (char t : J.toCharArray()) {
+            c[t] = 1;
         }
-        int result = 0;
-        for (char c : j.toCharArray()) {
-            int idx = c - 30;
-            result += arr[idx];
+        int count = 0;
+        for (char t : S.toCharArray()) {
+            if (c[t] == 1) {
+                count++;
+            }
         }
-        return result;
+        return count;
     }
 }
