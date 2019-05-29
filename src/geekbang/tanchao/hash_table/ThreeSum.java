@@ -10,42 +10,26 @@ import java.util.List;
  */
 
 public class ThreeSum {
+    public static void main(String[] args) {
+        int[] nums = new int[]{-2, 1, 1};
+        threeSum(nums);
+    }
+
     public static List<List<Integer>> threeSum(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return new ArrayList();
+        }
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList();
         threeSum(result, new ArrayList(), 0, nums, 0);
         return result;
     }
 
-    public static void oneSum(List<List<Integer>> result, List<Integer> list, int start, int[] nums, int target) {
-        if (nums[start] > target || nums[nums.length - 1] < target) {
-            return;
-        }
-        for (int i = start; i < nums.length; i++) {
-            if (i != start && nums[i] == nums[i--]) {
-                continue;
-            }
-            if (nums[i] == target) {
-                list.add(nums[i]);
-                result.add(new ArrayList(list));
-                list.remove(list.size() - 1);
-                return;
-            }
-        }
-    }
-
     public static void twoSum(List<List<Integer>> result, List<Integer> list, int start, int[] nums, int target) {
-        if (nums[start] * 2 > target || nums[nums.length - 1] < target) {
+        if (nums[start] * 2 > target || nums[nums.length - 1] * 2 < target) {
             return;
         }
-        for (int i = start; i < nums.length - 1; i++) {
-            if (i != start && nums[start] == nums[start--]) {
-                continue;
-            }
-            list.add(nums[i]);
-            oneSum(result, list, i + 1, nums, target - nums[i]);
-            list.remove(list.size() - 1);
-        }
+
     }
 
     public static void threeSum(List<List<Integer>> result, List<Integer> list, int start, int[] nums, int target) {
@@ -53,7 +37,7 @@ public class ThreeSum {
             return;
         }
         for (int i = start; i < nums.length - 2; i++) {
-            if (i != start && nums[start] == nums[start--]) {
+            if (i != start && nums[i] == nums[i - 1]) {
                 continue;
             }
             list.add(nums[i]);
