@@ -29,7 +29,29 @@ public class ThreeSum {
         if (nums[start] * 2 > target || nums[nums.length - 1] * 2 < target) {
             return;
         }
-
+        int end = nums.length - 1;
+        while (start < end) {
+            int sum = nums[start] + nums[end];
+            if (sum == target) {
+                list.add(nums[start]);
+                list.add(nums[end]);
+                result.add(new ArrayList<>(list));
+                list.remove(list.size() - 1);
+                list.remove(list.size() -1);
+                start++;
+                while (start < end && nums[start] == nums[start - 1]) {
+                    start++;
+                }
+                end--;
+                while (start < end && nums[end] == nums[end + 1]) {
+                    end--;
+                }
+            } else if (sum > target) {
+                end--;
+            } else {
+                start++;
+            }
+        }
     }
 
     public static void threeSum(List<List<Integer>> result, List<Integer> list, int start, int[] nums, int target) {
