@@ -1,7 +1,5 @@
 package geekbang.tanchao.sudoku;
 
-import java.util.Arrays;
-
 /**
  * @author wuping
  * @date 2019-06-27
