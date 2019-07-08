@@ -1,4 +1,4 @@
-package geekbang.tanchao.dynamic;
+package geekbang.tanchao.dp;
 
 import java.util.Arrays;
 
