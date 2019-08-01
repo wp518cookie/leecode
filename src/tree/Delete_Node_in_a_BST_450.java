@@ -5,15 +5,6 @@ import java.util.HashMap;
 /**
  * Created by ping.wu on 2016/11/30.
  */
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    public TreeNode(int n) {
-        this.val = n;
-    }
-}
 
 public class Delete_Node_in_a_BST_450 {
     public static void main(String[] args) {
