@@ -5,15 +5,6 @@ import java.util.List;
 /**
  * Created by ping.wu on 2016/11/17.
  */
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}
 
 public class Linked_List_Cycle_141 {
     public static void main(String[] args) {
