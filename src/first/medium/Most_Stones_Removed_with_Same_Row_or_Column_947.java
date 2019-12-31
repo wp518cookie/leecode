@@ -46,7 +46,8 @@ public class Most_Stones_Removed_with_Same_Row_or_Column_947 {
             }
         }
         Set<Integer> set = new HashSet();
-        return dfs(0, 0, set, xMapping, yMapping);
+        set.add((stones[0][1] << 14) + stones[0][0]);
+        return dfs(stones[0][0], stones[0][1], set, xMapping, yMapping);
     }
 
     private int dfs(int i, int j, Set<Integer> set, Map<Integer, List<Integer>> xMapping, Map<Integer, List<Integer>> yMapping) {
