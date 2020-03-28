@@ -10,11 +10,11 @@ package likou.first_try.top;
  *
  * 输入: [-2,1,-3,4,-1,2,1,-5,4],
  * 输出: 6
- *
+ *  todo dp的放一放
  */
 
 public class MaxSubArray_53 {
     public int maxSubArray(int[] nums) {
-
+        return -1;
     }
 }
