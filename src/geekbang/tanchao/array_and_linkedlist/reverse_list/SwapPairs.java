@@ -7,6 +7,7 @@ package geekbang.tanchao.array_and_linkedlist.reverse_list;
  */
 
 public class SwapPairs {
+
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null) {
             return head;

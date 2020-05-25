@@ -4,7 +4,7 @@ package likou.first_try.dynamic_programming;
  * @author wuping
  * @date 2020-04-16
  * https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
- *
+ * <p>
  * 给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；非负整数 fee 代表了交易股票的手续费用。
  * 你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。
  * 返回获得利润的最大值。
@@ -19,24 +19,33 @@ package likou.first_try.dynamic_programming;
  * 在此处卖出 prices[5] = 9
  * 总利润: ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
  * 注意:
- *
+ * <p>
  * 0 < prices.length <= 50000.
  * 0 < prices[i] < 50000.
  * 0 <= fee < 50000.
- *
+ * <p>
  * [1,3,2,8,4,9]
  * 2
+ *
+ * todo
  */
 
 public class MaxProfit_714 {
+    public static void main(String[] args) {
+        int[] arr = new int[]{1, 3, 2, 8, 4, 9};
+        System.out.println(new MaxProfit_714().maxProfit(arr, 2));
+    }
+
     public int maxProfit(int[] prices, int fee) {
-        int profit = 0;
+        int[] dp = new int[prices.length];
         for (int i = 1; i < prices.length; i++) {
-            int t = prices[i] - prices[i - 1];
-            if (t > fee) {
-                profit += t - fee;
+            dp[i] = Math.max(dp[i - 1], prices[i] - prices[0] - fee);
+        }
+        for (int i = 1; i < prices.length; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
+                dp[j] = Math.max(Math.max(dp[j - 1], dp[i - 1] + prices[j] - prices[i] - fee), dp[j]);
             }
         }
-        return profit;
+        return dp[prices.length - 1];
     }
 }
