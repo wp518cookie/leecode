@@ -2,6 +2,7 @@ package likou.company.bytedance.sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,28 +13,28 @@ import java.util.Set;
  * @author wuping
  * @date 2020-05-25
  * https://leetcode-cn.com/explore/featured/card/bytedance/243/array-and-sorting/1020/
- *
+ * <p>
  * 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。
  * 注意：答案中不可以包含重复的三元组。
  * 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
- *
+ * <p>
  * 满足要求的三元组集合为：
  * [
- *   [-1, 0, 1],
- *   [-1, -1, 2]
+ * [-1, 0, 1],
+ * [-1, -1, 2]
  * ]
  */
 
 public class ThreeSum {
     public static void main(String[] args) {
-        int[] nums = new int[]{-1,0,1,2,-1,-4};
+        int[] nums = new int[]{-1, 0, 1, 2, -1, -4};
         List<List<Integer>> result = new ThreeSum().threeSum(nums);
         System.out.println(123);
     }
 
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList();
-        if (nums == null || nums.length == 0) {
+        if (nums == null || nums.length < 3) {
             return result;
         }
         Arrays.sort(nums);
@@ -48,34 +49,133 @@ public class ThreeSum {
                 map.put(nums[i], 1);
             }
         }
-        recursion(0, 0, 0, nums, map, new ArrayList(), result);
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int t = -nums[i];
+            int half = t / 2;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
+                    continue;
+                }
+                if (nums[j] > half) {
+                    break;
+                }
+                if (map.containsKey(t - nums[j])) {
+                    if (nums[j] == t - nums[j]) {
+                        if (nums[i] == nums[j]) {
+                            if (map.get(nums[j]) > 2) {
+                                List<Integer> temp = new ArrayList();
+                                temp.add(nums[i]);
+                                temp.add(nums[j]);
+                                temp.add(t - nums[j]);
+                                result.add(temp);
+                                continue;
+                            }
+                        } else {
+                            if (map.get(nums[j]) > 1) {
+                                List<Integer> temp = new ArrayList();
+                                temp.add(nums[i]);
+                                temp.add(nums[j]);
+                                temp.add(t - nums[j]);
+                                result.add(temp);
+                                continue;
+                            }
+                        }
+                    } else if (nums[j] != t - nums[j]) {
+                        List<Integer> temp = new ArrayList();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(t - nums[j]);
+                        result.add(temp);
+                        continue;
+                    }
+                }
+            }
+        }
         return result;
     }
 
-    public void recursion(int start, int sum, int count, int[] nums, Map<Integer, Integer> map, List<Integer> current, List<List<Integer>> result) {
-        if (count == 2) {
-            int rest = 0 - sum;
-            if (current.get(current.size() - 1) <= rest && map.containsKey(rest) && map.get(rest) > 0) {
-                List<Integer> temp = new ArrayList<>(current);
-                temp.add(rest);
-                result.add(temp);
-            }
-            return;
+    public List<List<Integer>> threeSum1(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return Collections.emptyList();
         }
-        for (int i = start; i < nums.length; i++) {
-            if (i > start && nums[i - 1] == nums[i]) {
+
+        Arrays.sort(nums);
+        List<List<Integer>> ret = new ArrayList<>();
+        int length = nums.length;
+        for (int i = 0; i < length - 2; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            int rest = 0 - sum;
-            int t = nums[i];
-            if (t * (3 - count) > rest || nums[nums.length - 1] * (3 - count) < rest) {
-                return;
+            int l = i + 1, r = length - 1;
+            int curr = nums[i];
+            while (l < r) {
+                int sum = curr + nums[l] + nums[r];
+                if (sum == 0) {
+
+                    ret.add(Arrays.asList(curr, nums[l], nums[r]));
+
+                    while (l < r && nums[l] == nums[++l]) ;
+                    while (l < r && nums[r] == nums[--r]) ;
+                } else if (sum > 0) {
+                    // while (l < r && nums[r] == nums[--r]);
+                    --r;
+                } else {
+                    // while (l < r && nums[l] == nums[++l]);
+                    ++l;
+                }
             }
-            current.add(t);
-            map.put(t, map.get(t) - 1);
-            recursion(i + 1, sum + t, count + 1, nums, map, current, result);
-            current.remove(current.size() - 1);
-            map.put(t, map.get(t) + 1);
         }
+        return ret;
+    }
+
+    public List<List<Integer>> threeSum2(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (nums.length < 3) {
+            return list;
+        }
+        Arrays.sort(nums);
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] > 0) {
+                break;
+            }
+            if (j > 0 && nums[j] == nums[j - 1]) {
+                continue;
+            }
+            int left = j + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int threeSum = nums[j] + nums[left] + nums[right];
+                if (threeSum == 0) {
+                    List<Integer> innerList = new ArrayList<>();
+                    innerList.add(nums[left]);
+                    innerList.add(nums[j]);
+                    innerList.add(nums[right]);
+                    list.add(innerList);
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+                    while (left < right && nums[right] == nums[right - 1]) {
+                        right--;
+                    }
+                    left++;
+                    right--;
+                } else if (threeSum > 0) {
+                    right--;
+
+                } else if (threeSum < 0) {
+                    left++;
+                }
+            }
+        }
+        return list;
     }
 }
