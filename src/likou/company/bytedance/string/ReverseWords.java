@@ -1,5 +1,8 @@
 package likou.company.bytedance.string;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * @author wuping
  * @date 2020-06-29
@@ -31,29 +34,78 @@ package likou.company.bytedance.string;
  */
 
 public class ReverseWords {
+    public static void main(String[] args) {
+        String t = "a good   example";
+        System.out.println(new ReverseWords().reverseWords(t));
+    }
+
     public String reverseWords(String s) {
-        if (s == null || s.length() == 0) {
+        if (s ==null || s.length() == 0) {
             return s;
         }
         s = s.trim();
         if (s.length() == 0) {
-            return s;
+            return "";
         }
-        StringBuilder temp = new StringBuilder();
+        int start = -1;
+        Deque<Character> deque = new ArrayDeque<>();
         for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == ' ' && s.charAt(i - 1) == ' ') {
-                continue;
+            char t = s.charAt(i);
+            if (t != ' ') {
+                if (start < 0) {
+                    start = i;
+                }
+                if (i == s.length() - 1) {
+                    int cur = i;
+                    while (start >= 0 && cur >= start) {
+                        deque.addFirst(s.charAt(cur--));
+                    }
+                }
+            } else {
+                if (start < 0) {
+                    continue;
+                }
+                int cur = i - 1;
+                while (start >= 0 && cur >= start) {
+                    deque.addFirst(s.charAt(cur--));
+                }
+                deque.addFirst(' ');
+                start = -1;
             }
-            temp.append(s.charAt(i));
         }
-        String[] arr = temp.toString().split(" ");
+        if (deque.peekFirst() == ' ') {
+            deque.removeFirst();
+        }
         StringBuilder sb = new StringBuilder();
-        for (int i = arr.length - 1; i >= 0; i--) {
-            sb.append(arr[i]);
-            if (i != 0) {
-                sb.append(" ");
-            }
+        while (deque.size() > 0) {
+            sb.append(deque.removeFirst());
         }
         return sb.toString();
     }
+//    public String reverseWords(String s) {
+//        if (s == null || s.length() == 0) {
+//            return s;
+//        }
+//        s = s.trim();
+//        if (s.length() == 0) {
+//            return s;
+//        }
+//        StringBuilder temp = new StringBuilder();
+//        for (int i = 0; i < s.length(); i++) {
+//            if (s.charAt(i) == ' ' && s.charAt(i - 1) == ' ') {
+//                continue;
+//            }
+//            temp.append(s.charAt(i));
+//        }
+//        // 涉及正则表达式，很慢
+//        String[] arr = temp.toString().split(" ");
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = arr.length - 1; i >= 0; i--) {
+//            sb.append(arr[i]);
+//            if (i != 0) {
+//                sb.append(" ");
+//            }
+//        }
+//        return sb.toString();
+//    }
 }

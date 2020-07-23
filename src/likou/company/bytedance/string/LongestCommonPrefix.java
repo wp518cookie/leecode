@@ -23,6 +23,12 @@ package likou.company.bytedance.string;
  */
 
 public class LongestCommonPrefix {
+    public static void main(String[] args) {
+        String[] arr = {"aca", "cba"};
+        System.out.println(new LongestCommonPrefix().longestCommonPrefix(arr));
+    }
+
+    // 两两比较即可
     public String longestCommonPrefix(String[] strs) {
         if (strs == null || strs.length == 0) {
             return "";
@@ -39,16 +45,29 @@ public class LongestCommonPrefix {
         }
         return commonPrefix;
     }
+//      可以优化下是空间复杂度
+//    public String getCommonPrefix(String s1, String s2) {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < s1.length() && i < s2.length(); i++) {
+//            if (s1.charAt(i) == s2.charAt(i)) {
+//                sb.append(s1.charAt(i));
+//            } else {
+//                return sb.toString();
+//            }
+//        }
+//        return sb.toString();
+//    }
 
     public String getCommonPrefix(String s1, String s2) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < s1.length() && i < s2.length(); i++) {
+        int length = Math.min(s1.length(), s2.length());
+        int idx = 0;
+        for (int i = 0; i < length; i++) {
             if (s1.charAt(i) == s2.charAt(i)) {
-                sb.append(s1.charAt(i));
+                idx++;
             } else {
-                return sb.toString();
+                break;
             }
         }
-        return sb.toString();
+        return s1.substring(0, idx);
     }
 }
