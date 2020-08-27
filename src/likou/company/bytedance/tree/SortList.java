@@ -57,28 +57,41 @@ public class SortList {
 //        return dummy.next;
 //    }
 
-    //官方2
+    // 官方1 自己实现 自上而下，相对简单
+//    public ListNode sortList(ListNode head) {
+//        if (head == null || head.next == null) {
+//            return head;
+//        }
+//        ListNode fast = head;
+//        ListNode slow = head;
+//        while (fast.next != null && fast.next.next != null) {
+//            fast = fast.next.next;
+//            slow = slow.next;
+//        }
+//        ListNode tmp = slow.next;
+//        slow.next = null;
+//        ListNode left = sortList(head);
+//        ListNode right = sortList(tmp);
+//        ListNode dummy = new ListNode(-1);
+//        ListNode cur = dummy;
+//        while (left != null && right != null) {
+//            if (left.val <= right.val) {
+//                cur.next = left;
+//                left = left.next;
+//            } else {
+//                cur.next = right;
+//                right = right.next;
+//            }
+//            cur = cur.next;
+//        }
+//        cur.next = left == null ? right : left;
+//        return dummy.next;
+//    }
+
+    //官方2  自下而上
     public ListNode sortList(ListNode head) {
         return null;
     }
-
-//    public ListNode sortList(ListNode head) {
-//         return recursion(head);
-//    }
-//
-//    public ListNode recursion(ListNode head) {
-//        while (head == null || head.next == null) {
-//            return head;
-//        }
-//        int length = 0;
-//        ListNode h = head;
-//        while (h != null) {
-//            length++;
-//            h = h.next;
-//        }
-//        int intv = 1;
-//
-//    }
 
     public static class ListNode {
         int val;

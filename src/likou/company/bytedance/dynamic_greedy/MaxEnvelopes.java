@@ -1,5 +1,8 @@
 package likou.company.bytedance.dynamic_greedy;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * @author wuping
  * @date 2020-07-02
@@ -21,7 +24,22 @@ package likou.company.bytedance.dynamic_greedy;
  */
 
 public class MaxEnvelopes {
+//    public int maxEnvelopes(int[][] envelopes) {
+//        return -1;
+//    }
+
+    //官方解法
     public int maxEnvelopes(int[][] envelopes) {
-        return -1;
+        Arrays.sort(envelopes, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] arr1, int[] arr2) {
+                if (arr1[0] == arr2[0]) {
+                    return arr2[1] - arr1[1];
+                } else {
+                    return arr1[0] - arr2[0];
+                }
+        }});
+
+        return 0;
     }
 }

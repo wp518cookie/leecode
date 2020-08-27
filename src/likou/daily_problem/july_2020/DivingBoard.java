@@ -1,7 +1,5 @@
 package likou.daily_problem.july_2020;
 
-import java.util.List;
-
 /**
  * @author wuping
  * @date 2020-07-08

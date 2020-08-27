@@ -22,26 +22,68 @@ package likou.company.bytedance.dynamic_greedy;
  */
 
 public class MaxProfit {
+    // O(n)解法
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length < 2) {
             return 0;
         }
-        int[] maxArr = new int[prices.length];
-        int[] minArr = new int[prices.length];
-        int max = Integer.MIN_VALUE;
-        for (int i = prices.length - 1; i >= 0; i--) {
-            max = Math.max(prices[i], max);
-            maxArr[i] = max;
-        }
         int min = Integer.MAX_VALUE;
+        int max = 0;
         for (int i = 0; i < prices.length; i++) {
-            min = Math.min(min, prices[i]);
-            minArr[i] = min;
+            min = Math.min(prices[i], min);
+            max = Math.max(prices[i] - min, max);
         }
-        int result = 0;
-        for (int i = 0; i < prices.length - 1; i++) {
-            result = Math.max(result, maxArr[i + 1] - minArr[i]);
-        }
-        return result;
+        return max;
     }
+
+//    public int maxProfit(int[] prices) {
+//        if (prices == null || prices.length < 2) {
+//            return 0;
+//        }
+//        int length = prices.length;
+//        int[] maxArr = new int[length];
+//        int[] minArr = new int[length];
+//        for (int i = length - 1; i > 0; i--) {
+//            if (i == length - 1) {
+//                maxArr[i] = prices[i];
+//            } else {
+//                maxArr[i] = Math.max(prices[i], maxArr[i + 1]);
+//            }
+//        }
+//        for (int i = 0; i < length - 1; i++) {
+//            if (i == 0) {
+//                minArr[i] = prices[i];
+//            } else {
+//                minArr[i] = Math.min(prices[i], minArr[i - 1]);
+//            }
+//        }
+//        int result = 0;
+//        for (int i = 0; i < length - 1; i++) {
+//            result = Math.max(maxArr[i + 1] - minArr[i], result);
+//        }
+//        return result;
+//    }
+
+//    public int maxProfit(int[] prices) {
+//        if (prices == null || prices.length < 2) {
+//            return 0;
+//        }
+//        int[] maxArr = new int[prices.length];
+//        int[] minArr = new int[prices.length];
+//        int max = Integer.MIN_VALUE;
+//        for (int i = prices.length - 1; i >= 0; i--) {
+//            max = Math.max(prices[i], max);
+//            maxArr[i] = max;
+//        }
+//        int min = Integer.MAX_VALUE;
+//        for (int i = 0; i < prices.length; i++) {
+//            min = Math.min(min, prices[i]);
+//            minArr[i] = min;
+//        }
+//        int result = 0;
+//        for (int i = 0; i < prices.length - 1; i++) {
+//            result = Math.max(result, maxArr[i + 1] - minArr[i]);
+//        }
+//        return result;
+//    }
 }
