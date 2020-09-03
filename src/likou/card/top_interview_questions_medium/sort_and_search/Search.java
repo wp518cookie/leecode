@@ -26,6 +26,11 @@ package likou.card.top_interview_questions_medium.sort_and_search;
  */
 
 public class Search {
+    public static void main(String[] args) {
+        int[] nums = new int[]{5, 1, 2};
+        System.out.println(new Search().search(nums, 0));
+    }
+
     public int search(int[] nums, int target) {
         int l = 0;
         int r = nums.length - 1;
@@ -39,20 +44,23 @@ public class Search {
                     } else {
                         l = mid + 1;
                     }
+                } else {
+                    r = mid - 1;
                 }
             } else if (compareResult < 0) {
                 if (nums[l] <= nums[mid]) {
-                    r = mid + 1;
+                    l = mid + 1;
                 } else {
                     if (nums[l] > target) {
                         l = mid + 1;
                     } else {
-
+                        r = mid - 1;
                     }
                 }
             } else {
                 return mid;
             }
         }
+        return nums[l] == target ? l : -1;
     }
 }
