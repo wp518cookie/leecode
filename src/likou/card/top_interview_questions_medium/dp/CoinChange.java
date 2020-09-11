@@ -26,8 +26,10 @@ public class CoinChange {
     private int result = -1;
 
     public static void main(String[] args) {
-        int[] coins = new int[]{1, 2, 5};
-        System.out.println(new CoinChange().coinChange(coins, 11));
+//        int[] coins = new int[]{1, 2, 5};
+//        System.out.println(new CoinChange().coinChange(coins, 11));
+        int[] t = new int[]{1, 2, 5};
+        System.out.println(new CoinChange().coinChange(t, 11));
     }
 
     public int coinChange(int[] coins, int amount) {
@@ -38,25 +40,29 @@ public class CoinChange {
             return 0;
         }
         Arrays.sort(coins);
-        recursion(coins, coins.length - 1, amount, 0);
-        return result;
-    }
-
-    public void recursion(int[] coins, int start, int amount, int current) {
-        for (int i = start; i >= 0; i--) {
-            int t = coins[i];
-            if (t == amount) {
-                if (result == -1) {
-                    result = current + 1;
+        int[] dp = new int[amount + 1];
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                int t = i - coins[j];
+                if (t >= 0) {
+                    if (dp[t] == 0) {
+                        if (t == 0) {
+                            dp[i] = 1;
+                        } else {
+                            continue;
+                        }
+                    } else {
+                        if (dp[i] != 0) {
+                            dp[i] = Math.min(dp[i], dp[t] + 1);
+                        } else {
+                            dp[i] = dp[t] + 1;
+                        }
+                    }
                 } else {
-                    result = Math.min(current + 1, result);
+                    continue;
                 }
-                return;
-            } else if (t > amount) {
-                continue;
-            } else {
-                recursion(coins, i, amount - t, current + 1);
             }
         }
+        return dp[amount] == 0 ? -1 : dp[amount];
     }
 }
