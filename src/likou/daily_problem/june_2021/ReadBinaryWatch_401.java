@@ -108,4 +108,6 @@ public class ReadBinaryWatch_401 {
             minRecursion(i + 1, end, min + arr[i], c - 1, arr, minList);
         }
     }
+
+    //todo 枚举的话时间复杂度更低
 }
